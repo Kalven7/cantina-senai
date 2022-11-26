@@ -23,13 +23,14 @@ cd cantinaservice/
 npm i
 ```
 
-Rode o back-end (lembre-se de voltar pra página incial):
+Rode o front-end (no diretorio "/cantinaservice"):
+```sh
+npm run web
+```
+
+Rode o back-end (no diretório incial):
 ```sh
 npm run dev
 ```
 
-Rode o front-end:
-```sh
-cd cantinaservice/
-npm run web
-```
+
