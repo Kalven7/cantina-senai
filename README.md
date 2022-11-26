@@ -1,3 +1,5 @@
+<h1 align="center" class="line-1 anim-typewriter">Cantina SENAI</h1> 
+
 <h2 id="built_with">📝 Como rodar o projeto localmente:</h2>
 
 Clone o repositório:
