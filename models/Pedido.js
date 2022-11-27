@@ -35,7 +35,7 @@ const Pedido = connection.define(
         },
 
         valorTotal: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.FLOAT,
             allowNull: false,
         }
     }

@@ -9,6 +9,7 @@ import {
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../context/authContext";
 import api from "../../api";
+import addMaskMoney from "../../utils/addMaskMoney";
 
 const Pedidos = ({ navigation }) => {
   const { state, dispatch } = useContext(Context);
@@ -35,9 +36,23 @@ const Pedidos = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <View style={styles.container}>
+              {console.log(item)}
               <View style={styles.text}>
                 <Text style={styles.item}>{item.produto.nome}</Text>
                 <Text style={styles.title}>{item.produto.sabor}</Text>
+
+                <View style={styles.info}>
+                  <Text style={styles.quantity}>
+                    Quantidade: {item.quantidade}
+                  </Text>
+                  <Text style={styles.unityPrice}>
+                    Preço unitário:{" "}
+                    {addMaskMoney(item.valorTotal / item.quantidade)}
+                  </Text>
+                  <Text style={styles.totalPrice}>
+                    Preço total: {addMaskMoney(item.valorTotal)}
+                  </Text>
+                </View>
               </View>
             </View>
           );
@@ -74,9 +89,30 @@ const styles = StyleSheet.create({
     margin: 5,
     textAlign: "center",
   },
+  info: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 16,
+    marginTop: 25,
+    alignItems: "center",
+  },
+  quantity: {
+    fontSize: 16,
+    textAlign: "left",
+  },
+  totalPrice: {
+    fontSize: 16,
+    textAlign: "right",
+  },
+  unityPrice: {
+    fontSize: 16,
+    marginLeft: 40,
+    textAlign: "right",
+  },
   item: {
     margin: 5,
-    fontSize: 15,
+    textTransform: "capitalize",
+    fontSize: 16,
   },
   icon: {
     margin: 10,

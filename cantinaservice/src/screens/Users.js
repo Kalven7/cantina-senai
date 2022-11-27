@@ -16,18 +16,18 @@ import CustomButton from "../components/CustomButton";
 const Users = ({ navigation }) => {
   const { state, dispatch } = useContext(Context);
 
+  const [oldEmail, setOldEmail] = useState("");
   const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
 
   const AlterarUser = async () => {
     try {
-      const oldEmail = await AsyncStorage.getItem("email");
-      console.log(oldEmail);
-
       const data = await api.put("/user/update", {
         name: state.name,
         email: email,
         oldEmail: oldEmail,
+        oldPassword: oldPassword,
         password: password,
         admin: state.isAdmin,
       });
@@ -35,16 +35,18 @@ const Users = ({ navigation }) => {
         console.log(data);
         alert(data.data.message);
         dispatch({ type: "logOut" });
-      } else {
-        console.log(data);
       }
     } catch (err) {
-      console.log(err);
+      alert("Senha Inválida");
     }
   };
 
   useEffect(() => {
     const onScreenLoad = async () => {
+      const oldEmail = await AsyncStorage.getItem("email");
+      setOldEmail(oldEmail);
+      setEmail(oldEmail);
+
       const list = await api.get("/pedidos/findByUser", {
         params: {
           idUser: state.idUser,
@@ -64,7 +66,14 @@ const Users = ({ navigation }) => {
 
       <CustomInput placeholder="Email" value={email} setValue={setEmail} />
       <CustomInput
-        placeholder="Senha "
+        placeholder="Senha Atual"
+        value={oldPassword}
+        setValue={setOldPassword}
+        secureTextEntry={true}
+      />
+
+      <CustomInput
+        placeholder="Nova senha"
         value={password}
         setValue={setPassword}
         secureTextEntry={true}
