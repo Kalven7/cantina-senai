@@ -21,6 +21,7 @@ const Login = ({ navigation }) => {
             })
             if(authData.status === 200){
                 await AsyncStorage.setItem('token', authData.data.token)
+                await AsyncStorage.setItem('email', email)
                 dispatch({type:'logIn', payload: true})
             } else {
                 alert('Email ou Senha Inválidos')
