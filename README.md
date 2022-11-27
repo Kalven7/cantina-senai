@@ -44,3 +44,9 @@ MYSQL_PASSWORD = secret123 # | sua senha
 MYSQL_DATABASE = cantinasenai # | o nome do seu banco de dados criado no passo anterior
 JWT_SECRET = SENAI21
 ```
+
+9) - Por fim rode o arquivo migration, para criar as tabelas no banco:
+```sh
+npx run migration
+```
+
