@@ -44,9 +44,24 @@ MYSQL_PASSWORD = secret123 # | sua senha
 MYSQL_DATABASE = cantinasenai # | o nome do seu banco de dados criado no passo anterior
 JWT_SECRET = SENAI21
 ```
+9) - Entre no arquivo "cantinaservice/src/api/index.js" 
+   - Você deve alterar a baseURL para seu gateway padrão 
+   - Para encontra-lo no windows digite: ```ipconfig # ultima linha do retorno```
+   - Para encontra-lo no linux digite:```route # ultima linha do retorno```
+```dosini
+import axios from 'axios';
 
-9) - Por fim rode o arquivo migration, para criar as tabelas no banco:
+const api = axios.create({
+    baseURL: "http:// (coloque seu gateway padrão aqui) :3000"
+    
+    #Exemplo: "http://192.168.2.64:3000"
+})
+
+export default api
+```
+
+10) - Por fim rode o arquivo migration, para criar as tabelas no banco:
 ```sh
-npx run migration
+npx run migration.js
 ```
 
