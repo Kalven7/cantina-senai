@@ -19,7 +19,7 @@ const Produto = connection.define(
             allowNull: false
         },
         valor: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.FLOAT,
             allowNull: true
         },
     }

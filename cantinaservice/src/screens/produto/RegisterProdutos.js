@@ -7,19 +7,20 @@ import {
   CheckBox,
   Picker,
 } from "react-native";
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Logo from "../../../assets/images/Logo.png";
 import CustomInput from "../../components/CustomInput";
 import CustomButton from "../../components/CustomButton";
 import api from "../../api";
 import { Context } from "../../context/authContext";
+import CurrencyInput from "react-currency-masked-input";
 
 const RegisterProdutos = ({ navigation }) => {
   const { dispatch } = useContext(Context);
 
   const [nome, setNome] = useState("");
   const [sabor, setSabor] = useState("Salgado");
-  const [valor, setValor] = useState("");
+  const refValor = useRef();
 
   const { height } = useWindowDimensions();
 
@@ -28,13 +29,12 @@ const RegisterProdutos = ({ navigation }) => {
       const data = await api.post("/produto/register", {
         nome: nome,
         sabor: sabor,
-        valor: valor,
+        valor: Number(refValor.current.value),
       });
       if (data.status === 200) {
         alert(data.data.message);
         setNome("");
         setSabor("");
-        setValor("");
         dispatch({ type: "update", payload: true });
       } else {
         console.log(data.data.message);
@@ -68,12 +68,13 @@ const RegisterProdutos = ({ navigation }) => {
         <Picker.Item label="Doce" />
       </Picker>
 
-      <CustomInput
-        placeholder="Valor do produto"
-        value={valor}
-        setValue={setValor}
-      />
-
+      <View style={styles.container}>
+        <CurrencyInput
+          placeholder="Valor do produto"
+          style={styles.input}
+          ref={refValor}
+        />
+      </View>
       <CustomButton text="Registrar o produto" onPress={onRegisterPressed} />
     </View>
   );
@@ -112,6 +113,18 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     alignSelf: "center",
+  },
+  container: {
+    width: "100%",
+    marginVertical: 5,
+    borderWidth: 1,
+    borderColor: "#e8e8e8",
+    borderRadius: 5,
+  },
+  input: {
+    backgroundColor: "lightgray",
+    padding: 15,
+    fontWeight: "bold",
   },
 });
 
