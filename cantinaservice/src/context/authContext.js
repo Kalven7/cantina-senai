@@ -36,6 +36,7 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 idProduto: action.payload.id,
+                valorProduto: action.payload.valor,
                 nameProduto: action.payload.nome
             }
         case "update":
