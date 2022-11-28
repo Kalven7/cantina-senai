@@ -32,7 +32,7 @@ const RegisterProdutos = ({ navigation }) => {
         valor: Number(refValor.current.value),
       });
       if (data.status === 200) {
-        alert(data.data.message);
+        alert("Produto registrado!");
         setNome("");
         setSabor("");
         dispatch({ type: "update", payload: true });

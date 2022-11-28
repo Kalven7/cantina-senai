@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
+    fontWeight: "bold",
   },
   title: {
     fontSize: 20,

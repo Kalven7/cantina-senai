@@ -36,9 +36,12 @@ const Pedidos = ({ navigation }) => {
         renderItem={({ item }) => {
           return (
             <View style={styles.container}>
-              {console.log(item)}
               <View style={styles.text}>
-                <Text style={styles.item}>{item.produto.nome}</Text>
+                <View style={styles.infoProduct}>
+                  <Text style={styles.item}>{item.produto.nome}</Text>
+                  <Text style={styles.userName}>{state.name}</Text>
+                </View>
+
                 <Text style={styles.title}>{item.produto.sabor}</Text>
 
                 <View style={styles.info}>
@@ -89,10 +92,18 @@ const styles = StyleSheet.create({
     margin: 5,
     textAlign: "center",
   },
+  userName: {
+    textTransform: "capitalize",
+  },
+  infoProduct: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 6,
+    alignItems: "center",
+  },
   info: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 16,
     marginTop: 25,
     alignItems: "center",
   },
